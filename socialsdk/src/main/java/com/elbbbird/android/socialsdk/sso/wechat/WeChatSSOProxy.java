@@ -33,8 +33,8 @@ public class WeChatSSOProxy {
     private static IWXCallback callback;
 
     public static void login(Context context, IWXCallback callback, SocialInfo info) {
+        WeChatSSOProxy.callback = callback;
         if (!SocialSSOProxy.isTokenValid(context)) {
-            WeChatSSOProxy.callback = callback;
             SendAuth.Req req = new SendAuth.Req();
             req.scope = info.getWeChatScope();
             WeChat.getIWXAPIInstance(context, info.getWechatAppId()).sendReq(req);
