@@ -25,6 +25,9 @@ public class SocialUserKeeper {
     private static final String KEY_REFRESH_TOKEN = "refresh_token";
     private static final String KEY_SIGNATURE = "signature";
 
+    private static final String KEY_WECHAT_OPEN_ID = "wechat_open_id";
+    private static final String KEY_WECHAT_UNION_ID = "wechat_union_id";
+
     /**
      * 持久化用户信息
      *
@@ -45,6 +48,8 @@ public class SocialUserKeeper {
         editor.putString(KEY_REFRESH_TOKEN, user.getToken().getRefreshToken());
         editor.putLong(KEY_EXPIRES_TIME, user.getToken().getExpiresTime());
         editor.putString(KEY_SIGNATURE, user.getDesc());
+        editor.putString(KEY_WECHAT_OPEN_ID, user.getOpenId());
+        editor.putString(KEY_WECHAT_UNION_ID, user.getUnionId());
         editor.commit();
     }
 
@@ -66,6 +71,8 @@ public class SocialUserKeeper {
         user.setAvatar(preferences.getString(KEY_AVATAR, ""));
         user.setGender(preferences.getInt(KEY_GENDER, 0));
         user.setDesc(preferences.getString(KEY_SIGNATURE, ""));
+        user.setOpenId(preferences.getString(KEY_WECHAT_OPEN_ID, ""));
+        user.setUnionId(preferences.getString(KEY_WECHAT_UNION_ID, ""));
         token.setOpenId(preferences.getString(KEY_OPENID, ""));
         token.setToken(preferences.getString(KEY_TOKEN, ""));
         token.setRefreshToken(preferences.getString(KEY_REFRESH_TOKEN, ""));

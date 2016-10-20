@@ -22,6 +22,8 @@ public class SocialUser {
     private int gender;
     private String desc;
     private SocialToken token;
+    private String openId;
+    private String unionId;
 
     public SocialUser() {
     }
@@ -95,9 +97,33 @@ public class SocialUser {
         return getToken().getToken() != null && System.currentTimeMillis() < getToken().getExpiresTime();
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
     @Override
     public String toString() {
-        return "SocialUser: type=" + type + ", name=" + name + ", avatar=" + avatar + ", gender=" + gender + ", desc=" + desc
-                + ", token=" + token.getToken();
+        return "SocialUser{" +
+                "type=" + type +
+                ", name='" + name + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", gender=" + gender +
+                ", desc='" + desc + '\'' +
+                ", token=" + token +
+                ", openId='" + openId + '\'' +
+                ", unionId='" + unionId + '\'' +
+                '}';
     }
 }

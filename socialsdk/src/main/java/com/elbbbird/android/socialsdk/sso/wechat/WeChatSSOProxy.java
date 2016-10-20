@@ -2,11 +2,14 @@ package com.elbbbird.android.socialsdk.sso.wechat;
 
 import android.content.Context;
 
+import com.elbbbird.android.socialsdk.SocialUtils;
 import com.elbbbird.android.socialsdk.WeChat;
 import com.elbbbird.android.socialsdk.model.SocialInfo;
 import com.elbbbird.android.socialsdk.model.SocialToken;
 import com.elbbbird.android.socialsdk.model.SocialUser;
+import com.elbbbird.android.socialsdk.sso.SocialInfoKeeper;
 import com.elbbbird.android.socialsdk.sso.SocialSSOProxy;
+import com.elbbbird.android.socialsdk.sso.SocialUserKeeper;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 
@@ -35,6 +38,8 @@ public class WeChatSSOProxy {
             SendAuth.Req req = new SendAuth.Req();
             req.scope = info.getWeChatScope();
             WeChat.getIWXAPIInstance(context, info.getWechatAppId()).sendReq(req);
+        } else {
+            callback.onGetTokenSuccess(SocialSSOProxy.getUser(context).getToken());
         }
     }
 
@@ -98,6 +103,12 @@ public class WeChatSSOProxy {
 
                             SocialUser user = new SocialUser(SocialUser.TYPE_WECHAT,
                                     name, icon, gender, token);
+
+                            String openId = info.getString("openid");
+                            String unionId = info.getString("unionid");
+
+                            user.setOpenId(openId);
+                            user.setUnionId(unionId);
 
                             callback.onGetUserInfoSuccess(user);
                         } catch (JSONException e) {
