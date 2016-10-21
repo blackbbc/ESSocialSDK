@@ -94,6 +94,7 @@ public class SocialUser {
     }
 
     public boolean isTokenValid() {
+        // TODO: 需要访问微信API确认TOKEN是否有效
         return getToken().getToken() != null && System.currentTimeMillis() < getToken().getExpiresTime();
     }
 
